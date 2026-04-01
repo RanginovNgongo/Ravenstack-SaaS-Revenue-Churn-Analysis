@@ -1,4 +1,4 @@
-🚀 Ravenstack SaaS Executive Dashboard
+# Ravenstack SaaS Executive Dashboard
 
 End-to-End SQL & Power BI Analytics Project
 
