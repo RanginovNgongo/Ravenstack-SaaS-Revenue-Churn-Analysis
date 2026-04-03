@@ -1,43 +1,59 @@
-# Ravenstack SaaS Executive Dashboard
+# 🚀 Ravenstack SaaS Executive Performance Hub
+## End-to-End SQL & Power BI Analytics Project
 
-End-to-End SQL & Power BI Analytics Project
+## 📌 Project Overview
+This project features a comprehensive executive-level dashboard for Ravenstack, a high-growth SaaS company. By integrating multiple data streams, this dashboard provides a "Single Source of Truth" for revenue health, customer retention, and operational efficiency.
 
-📌 Project Overview
-This project provides a comprehensive analysis of Ravenstack, a fictional SaaS company. The goal was to transform raw, fragmented data into an interactive Executive Dashboard that tracks Monthly Recurring Revenue (MRR), Customer Retention, and Support Performance.
+### Key Performance Indicators (KPIs):
+- **Total MRR:** $11M (Annualized)
+- **Total Customers:** 500
+- **ARPU (Avg Revenue Per User):** $23K
+- **Avg Support Resolution:** 35.9 hours
 
-Key Questions Addressed:
+## 🏗️ Technical Architecture
 
-- What is our current Annual Recurring Revenue (ARR)?
-- Which industries are driving the most growth?
-- Why are customers churning, and what is the financial impact?
-- Is there a correlation between support ticket priority and customer satisfaction (CSAT)?
+### 1. Data Engineering (SQL Server)
+The foundation of this project is a relational database containing five core tables: `accounts`, `subscriptions`, `churn_events`, `feature_usage`, and `support_tickets`.
 
-🛠️ Tech Stack
-- Database: SQL Server (SSMS)
-- Data Visualization: Power BI Desktop
-- Language: SQL (Complex Joins & Aggregations), DAX (Calculated Measures)
-- Data Modeling: Star Schema
+- **Data Cleaning:** Used SQL to handle null values in `resolution_time` and normalized currency fields.
+- **Aggregation:** Developed complex queries to calculate monthly recurring revenue and churn flags.
 
-🏗️ The Data Pipeline
-1. SQL Architecture
-I imported 5 raw datasets into a SQL Server instance and developed a Master Analysis Script to validate the data.
-- Tables used: accounts, subscriptions, churn_events, feature_usage, and support_tickets.
-- Key SQL Techniques: Inner/Left Joins, Date formatting, and SUM/AVG aggregations.
+### 2. Data Modeling (Star Schema)
+Implemented a Star Schema in Power BI to optimize performance.
 
-2. Data Modeling (Star Schema)
-In Power BI, I established a One-to-Many relationship model. The accounts table acts as the central Dimension table, linked to the Fact tables via account_id.
+- **Fact Tables:** `subscriptions`, `support_tickets`, `churn_events`
+- **Dimension Tables:** `accounts`, `Date` (Auto-generated calendar table)
+- **Relationships:** Established 1:Many relationships using `account_id` as the primary key.
 
-3. DAX Measures (The Logic)
-- I authored custom DAX formulas to calculate high-level business KPIs:
-- Total MRR: $SUM(ravenstack_subscriptions[mrr_amount])$
-- ARPU (Avg Revenue Per User): $DIVIDE([Total MRR], [Total Customers])$
-- Avg Support Time: $AVERAGE(resolution_time_hours)$
+### 3. DAX Calculations
+Authored custom measures to provide deeper business insights:
 
-📊 Dashboard Insights
-- Revenue Leadership: The FinTech and DevTools sectors are the highest contributors to MRR, representing over 40% of total revenue.
-- Churn Analysis: While the customer churn rate remains stable, "Features" and "Pricing" are the leading causes of revenue leakage, totaling over $1.9K in refunds.
-- Support Efficiency: The average resolution time is 35.9 hours. Interestingly, "Urgent" tickets maintain a high CSAT (~4.2), indicating the support team prioritizes high-stakes issues effectively.
+- **Net Expansion:** `[Upgrades] - [Downgrades]` to track organic account growth.
+- **CSAT Performance:** `AVERAGE(support_tickets[satisfaction_score])` segmented by urgency.
+- **ARPU:** `DIVIDE([Total MRR], [Total Customers])` to measure unit economics.
 
-📸 Final Dashboard
+## 📊 Strategic Insights
 
-<img width="1159" height="651" alt="image" src="https://github.com/user-attachments/assets/107dfe24-4bca-4644-86c3-00d3da469896" />
+### 💰 Revenue & Market Share
+- **Industry Leadership:** FinTech is the strongest sector, contributing **$2.7M** to Total MRR, followed closely by DevTools ($2.4M).
+- **Billing Strategy:** Revenue is split almost perfectly 50/50 between Monthly and Annual billing, indicating a balanced cash flow and customer commitment model.
+
+### 📉 Churn & Revenue Leakage
+- **Primary Churn Driver:** Product Features are the #1 cause of revenue leakage ($1.9K), suggesting that expanding the product roadmap is a higher priority than lowering prices.
+- **Competitive Pressure:** Roughly 104 customers left for competitors, signaling a need for improved "sticky" features.
+
+### 🛠️ Support & Customer Success
+- **Expert Intervention:** Tickets escalated to "Expert" status (Tier 2) consistently achieve higher CSAT scores (4.2) compared to standard tickets (4.0).
+- **Efficiency:** Despite handling urgent issues, the team maintains a steady satisfaction score around 4.1, proving high operational resilience.
+
+### 📈 Growth Trends
+- **Expansion Flow:** The Upgrade vs Downgrade monthly view shows a strong "Green" trend, with upgrades significantly outperforming downgrades in almost every month of 2024.
+
+## 📸 Dashboard Preview
+- Executive Overview
+
+<img width="1235" height="694" alt="image" src="https://github.com/user-attachments/assets/47dafd0c-981c-436c-90c5-67b3f5039fd1" />
+
+- Revenue & Support Deep-Dive
+
+<img width="1215" height="683" alt="image" src="https://github.com/user-attachments/assets/4890b6da-0db5-4ff8-b71d-d8b81561ccfc" />
